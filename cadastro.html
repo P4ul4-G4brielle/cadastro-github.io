@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Aluno</title>
+    <style>
+    
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+        .container {
+            width: 60%;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Cadastro de Aluno</h1>
+    <form id="formCadastro">
+        <label for="nome_completo">Nome Completo:</label>
+        <input type="text" id="nome_completo" name="nome_completo" required><br>
+
+        <label for="nome_mae">Nome da Mãe:</label>
+        <input type="text" id="nome_mae" name="nome_mae" required><br>
+
+        <label for="nome_pai">Nome do Pai:</label>
+        <input type="text" id="nome_pai" name="nome_pai" required><br>
+
+        <label for="idade">Idade:</label>
+        <input type="number" id="idade" name="idade" required><br>
+
+        <label for="data_nascimento">Data de Nascimento:</label>
+        <input type="date" id="data_nascimento" name="data_nascimento" required><br>
+
+        <label for="endereco">Endereço:</label>
+        <input type="text" id="endereco" name="endereco" required><br>
+
+        <label for="telefone">Telefone:</label>
+        <input type="text" id="telefone" name="telefone" required><br>
+
+        <label for="inclusao">Tem Inclusão?</label>
+        <input type="checkbox" id="inclusao" name="inclusao"><br>
+
+        <label for="descricao_inclusao">Descrição da Inclusão:</label>
+        <input type="text" id="descricao_inclusao" name="descricao_inclusao"><br>
+
+        <label for="laudo">Laudo ou Investigação:</label>
+        <select id="laudo" name="laudo">
+            <option value="Laudo">Laudo</option>
+            <option value="Investigação">Investigação</option>
+            <option value="Nenhum">Nenhum</option>
+        </select><br>
+
+        <label for="professor_especial">Acompanhado de Professor de Ensino Especial?</label>
+        <input type="checkbox" id="professor_especial" name="professor_especial"><br>
+
+        <label for="nome_professor">Nome do Professor:</label>
+        <input type="text" id="nome_professor" name="nome_professor"><br>
+
+        <button type="submit">Cadastrar</button>
+    </form>
+
+    <br>
+    <button onclick="window.location.href='aluno.html'">Ver Alunos</button>
+</div>
+
+<script>
+    document.getElementById("formCadastro").addEventListener("submit", function(event) {
+        event.preventDefault(); 
+
+        const aluno = {
+            nome_completo: document.getElementById("nome_completo").value,
+            nome_mae: document.getElementById("nome_mae").value,
+            nome_pai: document.getElementById("nome_pai").value,
+            idade: document.getElementById("idade").value,
+            data_nascimento: document.getElementById("data_nascimento").value,
+            endereco: document.getElementById("endereco").value,
+            telefone: document.getElementById("telefone").value,
+            inclusao: document.getElementById("inclusao").checked ? "Sim" : "Não",
+            descricao_inclusao: document.getElementById("descricao_inclusao").value,
+            laudo: document.getElementById("laudo").value,
+            professor_especial: document.getElementById("professor_especial").checked ? "Sim" : "Não",
+            nome_professor: document.getElementById("nome_professor").value,
+        };
+
+        let alunos = JSON.parse(localStorage.getItem("alunos")) || [];
+
+        alunos.push(aluno);
+
+        localStorage.setItem("alunos", JSON.stringify(alunos));
+
+        window.location.href = "aluno.html";
+    });
+</script>
+
+</body>
+</html>
